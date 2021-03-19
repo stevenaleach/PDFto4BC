@@ -8,7 +8,7 @@ Originally created for a personal DIY e-reader project based on an ESP32 and Wav
       ./PDFto4BC [display/convert] [pages to display] [options] input_file [output_file]
   
 
-###### display:
+#### display:
 display, followed by one or more page numbers will display a preview of the cropped/stretched/16-color converted pages specified.
 This is to be able to find the 'ideal' edge cropping (and which pages to exclude from said cropping) for the document by trial and error from the command line.
 
@@ -18,7 +18,7 @@ Example:
       
 will display the six listed pages with the 'zoom' that will result from the specified edge trims.
 
-###### convert:
+#### convert:
 convert accepts optional arguments no_crop and exclude, those pages in the no_crop list will not be trimmed before downscaling to the target width and height, those pages in the exclude list will be left out entirely.
 
 Example:
