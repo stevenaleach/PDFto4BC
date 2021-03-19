@@ -12,19 +12,27 @@ Originally created for a personal DIY e-reader project based on an ESP32 and Wav
 display, followed by one or more page numbers will display a preview of the cropped/stretched/16-color converted pages specified.
 This is to be able to find the 'ideal' edge cropping (and which pages to exclude from said cropping) for the document by trial and error from the command line.
 
+Example:
+
+      ./PDFto4BC display 1 2 3 98 99 100 height 1024 width 768 top 25 bottom 30 left 10 right 20 input.pdf
+      
+will display the six listed pages with the 'zoom' that will result from the specified edge trims.
+
 ###### convert:
 convert accepts optional arguments no_crop and exclude, those pages in the no_crop list will not be trimmed before downscaling to the target width and height, those pages in the exclude list will be left out entirely.
 
 Example:
+
       ./PDFto4BC convert width 500 height 1000 top 10 bottom 10 left 25 right 15 no_crop 0 3 199 exclude 2 197 198 input.pdf output.4bc
-      
+
+will convert and include all pages not listed in 'exclude', trim/zoom with the specified edge cropping all pages not listed in 'no_crop', and will store the output in a new file named 'output.4bc'
       
 ###### metadata:
-You'll notice no options to include metadata, and that's because it consists of free-form text that may optionally be appended to the file (using `cat >> output.4bf`, for instance). The file is perfectly valid without it, and any text appended is fine (I've been using it to add tab separated key-value strings, one per line, with author, title, and year on the files I've been playing with).
+You'll notice no options to include metadata, and that's because it consists of free-form text that may optionally be appended to the file (using `cat >> output.4bf`, for instance). The file is perfectly valid without it, and any text appended is fine (I've been using it to add tab separated key-value strings, one per line, with author, title, and year on the files I've been playing with so far).
 
-###### Inspecting/Viewing the resuting file in Python:
+###### Inspecting/Viewing the resuting file in a Jupyter Notebook:
 
-No tool is provided above to easily view the document... the easiest and most convenient way is to just use a Jupyter Notebook.  The following code pasted in to a notebook should load the example file, print out it's height, width, document length, meta-data, and then display the first ten pages:
+No tool is provided above to easily inspect/view the output document... the easiest and most convenient way is in a Jupyter Notebook.  The following code pasted in to a notebook should load the example file, print out it's height, width, number of pages, the text meta-data, and will then display the first ten pages in the notebook:
 
           import numpy as np, os, sys, matplotlib.pyplot as plt
           from PIL import Image
