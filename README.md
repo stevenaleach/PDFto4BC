@@ -27,10 +27,10 @@ Example:
 
 will convert and include all pages not listed in 'exclude', trim/zoom with the specified edge cropping all pages not listed in 'no_crop', and will store the output in a new file named 'output.4bc'
       
-###### metadata:
+#### Adding Metadata:
 You'll notice no options to include metadata, and that's because it consists of free-form text that may optionally be appended to the file (using `cat >> output.4bf`, for instance). The file is perfectly valid without it, and any text appended is fine (I've been using it to add tab separated key-value strings, one per line, with author, title, and year on the files I've been playing with so far).
 
-###### Inspecting/Viewing the resuting file in a Jupyter Notebook:
+#### Inspecting/Viewing the resuting file in a Jupyter Notebook:
 
 No tool is provided above to easily inspect/view the output document... the easiest and most convenient way is in a Jupyter Notebook.  The following code pasted in to a notebook should load the example file, print out it's height, width, number of pages, the text meta-data, and will then display the first ten pages in the notebook:
 
