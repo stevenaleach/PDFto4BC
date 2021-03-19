@@ -79,6 +79,6 @@ No tool is provided above to easily inspect/view the output document... the easi
 ### Compressed Page Format:
 Pages are run-length encoded pixel pairs, two pixels per byte.
 
-Byte n = repitition count, if this value is greater than zero, it represents the number of times to repeat the next byte (pixel-pair in byte n+1). If the count is zero, it is a 'raw flag' and the next byte, n+1 then represents a byte-length count for a block of raw pixel pair bytes beginning at byte n+2.  As there is no termination/division between pages, the decoder should simply continue parsing until height * width pixels, or height * width / 2 bytes of packed pixels have been recovered.
+Byte n = repitition count, if this value is greater than zero, it represents the number of times to repeat the next byte (pixel-pair in byte n+1). If the count is zero, it is a 'raw flag' and the next byte, n+1 then represents a byte-length count for a block of raw pixel pair bytes beginning at byte n+2.
            
 
