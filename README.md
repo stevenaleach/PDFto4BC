@@ -4,6 +4,55 @@ A tool to convert .PDF documents to a paginated four-bit depth packed-pixel run-
 
 Originally created for a personal DIY e-reader project based on an ESP32 and WaveShare e-ink display (1404x1872, four-bit per pixel), which is why these are the default height and width in the code if no other values are specified.
 
+### Usage:
+      ./PDFto4BC [display/convert] [pages to display] options input_file [output_file]
+  
+
+###### display:
+display, followed by one or more page numbers will display a preview of the cropped/stretched/16-color converted pages specified.
+This is to be able to find the 'ideal' edge cropping (and which pages to exclude from said cropping) for the document by trial and error from the command line.
+
+###### convert:
+convert accepts optional arguments no_crop and exclude, those pages in the no_crop list will not be trimmed before downscaling to the target width and height, those pages in the exclude list will be left out entirely.
+
+Example:
+      ./PDFto4BC convert width 500 height 1000 top 10 bottom 10 left 25 right 15 no_crop 0 3 199 exclude 2 197 198 input.pdf output.4bc
+      
+      
+###### metadata:
+You'll notice no options to include metadata, and that's because it consists of free-form text that may optionally be appended to the file (using `cat >> output.4bf`, for instance). The file is perfectly valid without it, and any text appended is fine (I've been using it to add tab separated key-value strings, one per line, with author, title, and year on the files I've been playing with).
+
+###### Inspecting/Viewing the resuting file in Python:
+
+No tool is provided above to easily view the document... the easiest and most convenient way is to just use a Jupyter Notebook.  The following code pasted in to a notebook should load the example file, print out it's height, width, document length, meta-data, and then display the first ten pages:
+
+          import numpy as np, os, sys, matplotlib.pyplot as plt
+          from PIL import Image
+          import PDFto4BC as B4
+
+          _,pages = B4.load_document('./The_Little_Prince_500x1000.4bc')
+          WIDTH,HEIGHT,TEXT =_
+
+          print('Width',WIDTH)
+          print('Height',HEIGHT)
+          print(len(pages),'pages')
+          print('Meta-Text:')
+          print(TEXT)
+
+          def show(bar,height=HEIGHT,width=WIDTH):
+              a = np.frombuffer(bar, dtype=np.uint8)
+              if len(set(a)) == 1 and a[0] == 255:
+                  a[0]=244 #fix for pyplot.imshow that shows black for blank pages.
+              a = a.reshape(height,width)
+              plt.figure(figsize=(8.5*2,11*2))
+              plt.imshow(a,cmap='Greys_r')
+              plt.show()
+
+          for i in range(10):
+              show(B4.unpack_nibbles(B4.decompress(pages[i])),
+                   width=WIDTH,height=HEIGHT)
+
+
 ### Document Container Format:
   
     uint16 width
