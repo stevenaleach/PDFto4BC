@@ -9,7 +9,7 @@ Originally created for a personal DIY e-reader project based on an ESP32 and Wav
   
 
 #### display:
-display, followed by one or more page numbers will display a preview of the cropped/stretched/16-color converted pages specified.
+display, followed by one or more page numbers will display a preview of the cropped/stretched/16-shade converted pages specified.
 This is to be able to find the 'ideal' edge cropping (and which pages to exclude from said cropping) for the document by trial and error from the command line.
 
 Example:
