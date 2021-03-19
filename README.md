@@ -70,10 +70,10 @@ No tool is provided above to easily inspect/view the output document... the easi
     uint32 byte-length of 2nd page..
         ...
     uint32 0x00000000 <-- index terminator.
-    [n-bytes page 1]
-    [n-bytes page 2]
+    [n-bytes compressed page 1 bitmap]
+    [n-bytes compressed page 2 bitmap]
     ...
-    [n-bytes last page]
+    [n-bytes compressed last page bitmap]
     [0+ bytes free-form text to EOF]
   
 ### Compressed Page Format:
