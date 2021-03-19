@@ -81,4 +81,20 @@ Pages are run-length encoded pixel pairs, two pixels per byte.
 
 Byte n = repitition count, if this value is greater than zero, it represents the number of times to repeat the next byte (pixel-pair in byte n+1). If the count is zero, it is a 'raw flag' and the next byte, n+1 then represents a byte-length count for a block of raw pixel pair bytes beginning at byte n+2.
            
+Perhaps better explained by the code: 
 
+                  def decompress(bar):
+                      i=0; outbar = bytearray()
+                      while i < len(bar) - 1:
+                          c = bar[i]; i+=1
+                          if c > 0:
+                              for j in range(c):
+                                  outbar.append(bar[i])
+                              i+=1
+                          if c == 0:
+                              c = bar[i]; i+=1
+                              for j in range(c):
+                                  outbar.append(bar[i]); i+=1
+                      return(outbar)         
+
+That's it.. easy lifting for a microcontroller. 
