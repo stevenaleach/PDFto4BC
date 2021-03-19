@@ -4,18 +4,18 @@ A tool to convert .PDF documents to a paginated four-bit depth packed-pixel run-
 
 ### Document Format:
   
-  uint16 width
-  uint16 height
-  uint16 #pages
-  uint32 byte-length of 1st page.
-  uint32 byte-length of 2nd page..
-      ...
-  uint32 0x00000000 <-- index terminator.
-  [n-bytes page 1]
-  [n-bytes page 2]
-  ...
-  [n-bytes last page]
-  [0+ bytes free-form text to EOF]
+    uint16 width
+    uint16 height
+    uint16 #pages
+    uint32 byte-length of 1st page.
+    uint32 byte-length of 2nd page..
+        ...
+    uint32 0x00000000 <-- index terminator.
+    [n-bytes page 1]
+    [n-bytes page 2]
+    ...
+    [n-bytes last page]
+    [0+ bytes free-form text to EOF]
   
 ### Page Format:
 Pages are run-length encoded pixel pairs, two pixels per byte.
