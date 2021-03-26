@@ -1,5 +1,7 @@
 # PDFto4BC
 
+# OUTDATED: I'm going to be re-implementing the compression/decompression - we  can do better ;-) Variable-length unsigned ints for run-lengths instead of batches of 255 max, and two-bit additive/subtractive values with a base value and sign for prefix should pack much of the raw byte blocks at four pixels per block... compression should be a lot better and still easy for the microcontroller to handle... 
+
 A tool to convert .PDF documents to a paginated four-bit depth packed-pixel run-length encoded format with appended text metadata. Allows for optional cropping and scales to a specified target display's dimensions. The "4bc" format is intended to be easily parsed and decompressed a page at a time by low-power small memory devices (microcontrollers) while still providing reasonably good compression. 
 
 Originally created for a personal DIY e-reader project based on an ESP32 and WaveShare e-ink display (1404x1872, four-bit per pixel), which is why these are the default height and width in the code if no other values are specified.
