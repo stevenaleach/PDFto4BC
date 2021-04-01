@@ -142,8 +142,8 @@ Now you'll want to do the actual conversion:
              
  
 ### Options:
-* scan: start stop plus height width
-* convert: no_crop exclude left right top bottom text height width
+* **scan**: start stop plus height width
+* **convert**: no_crop exclude left right top bottom text height width
 
 An additional command, display, is provided to see how a page will look with given cropping options - useful along with scan to find optimal values and which pages not to scale and to exclude from the scan.
 
