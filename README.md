@@ -2,6 +2,8 @@
 
 A small command line tool and Python library for scaling, cropping, and converting .PDF documents to a 16-shade (e-ink targeted) format easily handled by low-power low-memory devices (microcontrollers). The container format includes meta-text (title, author, etc.) as well as a plain-text "transcript" (line breaks preserved, but all extraneous whitespace and blank lines removed, single space separation between words) for each page in addition to high quality compressed lossless pixmaps of rendered pages at the desired target resolution. In lieu of a desktop viewer, see this notebook https://github.com/stevenaleach/PDFto4BC/blob/main/4BC.ipynb for an idea of how to inspect converted documents.
 
+### File Format:
+
 Page pixmaps are run-length compressed packed-nibble bytes with varint runlengths, and a zero-prefix followed by a varint runlength flagging raw byte blocks, while runlengths without a zero prefix specify repititions for the single byte which follows. This is extremely simple to decode as the following Python code demonstrates:
 
             def decompress(inbar):
