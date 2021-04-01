@@ -1,6 +1,26 @@
 # PDFto4BC
 
-A small command line tool and Python library for scaling, cropping, and converting .PDF documents to a format easily handled by low-power low-memory devices (microcontrollers). In lieu of a desktop viewer, see this notebook https://github.com/stevenaleach/PDFto4BC/blob/main/4BC.ipynb for an idea of how to inspect converted documents.
+A small command line tool and Python library for scaling, cropping, and converting .PDF documents to a 16-shade (e-ink targeted) format easily handled by low-power low-memory devices (microcontrollers). The container format includes meta-text (title, author, etc.) as well as a plain-text "transcript" (line breaks preserved, but all extraneous whitespace and blank lines removed, single space separation between words) for each page in addition to high quality compressed lossless pixmaps at the desired target resolution. In lieu of a desktop viewer, see this notebook https://github.com/stevenaleach/PDFto4BC/blob/main/4BC.ipynb for an idea of how to inspect converted documents.
+
+Page pixmaps are run-length compressed packed-nibble bytes with varint runlengths, and a zero-prefix followed by a varint runlength flagging raw byte blocks, while runlengths without a zero prefix specify repititions for the single byte which follows.
+
+The container format is relatively simple:
+
+    uint16, little endian: width
+    uint16, little endian: height
+    uint16, little endian: pages
+    uint32, little endian: byte-count page 0
+    uint32, little endian: byte-count page 1
+    ..
+    uint32, little endian: byte-count last page.
+    uint32, little endian: 0 terminator for index.
+    [n bytes compressed pixmap page 0]
+    [n bytes compressed pixmap page 1]
+    ...
+    [n bytes compressed pixmap last page]
+    [begin meta-text, if any]
+
+Following the pixmaps, meta-text followed by document text may be (and by default is) included. This text block begins with tab separated key-value pair lines and, if page transcript text is include (which by default it is), each page transcript will be prefixed by ASCII control character 1 (Start of Heading), the 'printed' (ASCII decimal representation) page number, followed by control character 2 (start of text), the page text (utf-8 encoded), and control character 3 (end of text) at the end of each page -- ASCII decimal representation for page numbers (starting at 0) are used rather than integers and standard ASCII control characters for delimiters so that the text block can be easily dumped and viewed, or otherwise treated as plain-text.
 
 ### Usage:
 
