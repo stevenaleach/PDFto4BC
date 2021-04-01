@@ -97,7 +97,7 @@ Output:
 
 ### Usage:
 
-There are three commands: scan, convert, and display - one of which must be the first argument on the command line.
+There are three commands: **scan**, **convert**, and **display** - one of which must be the first argument on the command line.
 
 If you want margins to be trimmed, you'll want to begin by 'scanning' the document to get cropping values. Scan accepts the options start and stop to specify a range of pages to be scanned (you will want it to ignore full page cover art, for instance). Example:
 
@@ -145,7 +145,7 @@ Now you'll want to do the actual conversion:
 * **scan**: start stop plus height width
 * **convert**: no_crop exclude left right top bottom text height width
 
-An additional command, display, is provided to see how a page will look with given cropping options - useful along with scan to find optimal values and which pages not to scale and to exclude from the scan.
+An additional command, **display**, is provided to see how a page (or list of pages) will look with given cropping/rescaling options - useful along with scan to find optimal values and which pages not to scale and to exclude from the scan.
 
 Height and width may be specified on the command line, if not provided the hard-coded default values will be used (HEIGHT, WIDTH) which you will want to change to match the resolution of your target screen.
 
