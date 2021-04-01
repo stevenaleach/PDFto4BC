@@ -1,6 +1,6 @@
 # PDFto4BC
 
-A small command line tool and Python library for scaling, cropping, and converting .PDF documents to format easily handled by low-power low-memory devices (microcontrollers). In lieu of a desktop viewer, see this notebook https://github.com/stevenaleach/PDFto4BC/blob/main/4BC.ipynb for an idea of how to inspect converted documents.
+A small command line tool and Python library for scaling, cropping, and converting .PDF documents to a format easily handled by low-power low-memory devices (microcontrollers). In lieu of a desktop viewer, see this notebook https://github.com/stevenaleach/PDFto4BC/blob/main/4BC.ipynb for an idea of how to inspect converted documents.
 
 ### Usage:
 
